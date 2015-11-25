@@ -16,10 +16,10 @@ object CoproductHandler {
       json.Object(obj.asInstanceOf[json.Object].elements + (typeKey -> json.String(typeName)))
 
     def unapply(js: JSON): Option[(String, JSON)] = {
-      val m = json.asInstanceOf[json.Object].elements
+      val m = js.asInstanceOf[json.Object].elements
       m.get(typeKey).flatMap(t =>
         try {
-          Some(t.asInstanceOf[String])
+          Some(t.asInstanceOf[json.String].value)
         } catch {
           case e: Throwable => None
         }
