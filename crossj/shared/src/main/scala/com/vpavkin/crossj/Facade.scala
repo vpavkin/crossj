@@ -11,4 +11,6 @@ trait Facade {
   def read[T: Reader](o: String): ReadResult[T] = parser.parse(o).flatMap(read(_))
   def read[T: Reader](o: JSON): ReadResult[T] = implicitly[Reader[T]].read(o)
 
+  def parse(o: String): ReadResult[JSON] = parser.parse(o)
+
 }
